@@ -1,0 +1,26 @@
+Package: bytescircle
+Title: Statistics About Bytes Contained in a File as a Circle Plot
+Version: 1.0
+Authors@R: person("Roberto", "S .Galende", email = "roberto.s.galende@gmail.com", role = c("aut", "cre"))
+Description: Shows statistics about bytes contained in a file 
+  as a circle graph of deviations from mean in sigma increments. 
+  The function can be useful for statistically analyze the content of files 
+  in a glimpse: text files are shown as a green centered crown, compressed 
+  and encrypted files should be shown as equally distributed variations with 
+  a very low CV (sigma/mean), and other types of files can be classified between 
+  these two categories depending on their text vs binary content, which can be 
+  useful to quickly determine how information is stored inside them (databases, 
+  multimedia files, etc). 
+Depends: R (>= 3.3.1)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+NeedsCompilation: yes
+Packaged: 2016-11-15 21:08:50 UTC; roberto
+Author: Roberto S .Galende [aut, cre]
+Maintainer: Roberto S .Galende <roberto.s.galende@gmail.com>
+Repository: CRAN
+Date/Publication: 2016-11-16 06:26:49

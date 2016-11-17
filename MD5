@@ -1,0 +1,17 @@
+8227f93a6b837af3f83195b4f97ee32a *DESCRIPTION
+ca63a3fd42e9563c6e15ca5f66b7b577 *NAMESPACE
+87615fd610b67201ebb65c231cdc4cea *R/bytescircle.R
+da023b8fe41f39febf4ad7b54065ab8f *build/vignette.rds
+f3ef718e7a5d656ca157362228c31b3b *inst/doc/bytescircle.R
+c55aaa83c36351aa10af62a865827e5a *inst/doc/bytescircle.Rmd
+a9b64bad5ad7ee38634479fd3ae3419c *inst/doc/bytescircle.pdf
+3c34afdc3adf82d2448f12715a255122 *inst/extdata/gplv3.txt
+6d9adff50cd5ad3fee8092a1b0f025cb *inst/extdata/gplv3.txt.gz
+5e3e31e04b66614f546c55ce8407d4ae *man/bytescircle.Rd
+29cd1c9dcf651d69e8c00377f3809c23 *src/bytescircle_read_file_.c
+c55aaa83c36351aa10af62a865827e5a *vignettes/bytescircle.Rmd
+d2fbff6431beb754f24571f9951f1b88 *vignettes/bytescircle_plot_1.png
+bad103c063890b3b45ffe8db43690778 *vignettes/bytescircle_plot_2.png
+6bca72b7de2ccab9698c8cfc230aa487 *vignettes/bytescircle_plot_3.png
+298ed0b554615bbad114a02a413bb229 *vignettes/bytescircle_plot_4.png
+c448d4f149d02cb0d7272252e16e193f *vignettes/bytescircle_plot_5.png
