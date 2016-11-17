@@ -3,7 +3,7 @@
 //
 // by Roberto S. Galende
 // port of linux' bytes-circle to R
-// v1.0, Nov 2016
+// v1.0-1, Nov 2016
 //
 // licensed under GPL-3
 //
@@ -18,23 +18,22 @@
 #include <stdio.h>  // FILE, fopen
 #include <string.h> // strlen
 
-FILE *hFile;
-
-void bytescircle_read_file_(char** FILE, double* BYTE_out) {
+void bytescircle_read_file_(char** R_FILE, double* R_BYTE_out) {
     
     const unsigned int buffer_length = BUFFER_LENGTH;
     long long bytes[256];
     int i;
+    FILE *hFile;
     ////long long total_size = 0;
     char buffer[BUFFER_LENGTH];
     size_t k;
     size_t bytes_read;
 
-    if (strlen(FILE[0])==0) {
+    if (strlen(R_FILE[0])==0) {
         // return no result
         return;
     } else {
-        hFile = fopen(FILE[0], "rb");
+        hFile = fopen(R_FILE[0], "rb");
     }
 
     if ( hFile == NULL ) {
@@ -62,7 +61,7 @@ void bytescircle_read_file_(char** FILE, double* BYTE_out) {
     // but this should be irrevelant for this statistic work,
     // as relative magnitudes are preserved)
     for (i = 0; i < 256; ++i) {
-        BYTE_out[i] = (double)bytes[i];
+        R_BYTE_out[i] = (double)bytes[i];
     }
 
 }

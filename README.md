@@ -18,13 +18,13 @@ Usage
 Arguments
 =========
 
-FILE	
+*FILE*	
 char array with the path to an existing file to analyse   
 
-ascii	
+*ascii*	
 boolean, if TRUE R will output an ascii circle char of deviations from sigma (true sd). Each ascii char represents a different deviation from sigma. The array of chars used (from -9/4 to +9/4 sigma, in increments of 0.5 sigma) can be printed using parameter 'output=2'   
 
-plot	
+*plot*	
 number from 0 to 5, indicates plot to represent:   
 0: no plot   
 1: circle of bytes: using an archimedean spiral each byte value is represented with a coloured circle which size indicates the amount of deviation from sigma. A green colour indicates positive sigma value whilst red indicates a negative sigma value. Blue little circles represents byte values that do not appear in the file   
@@ -35,13 +35,13 @@ number from 0 to 5, indicates plot to represent:
 
 Note that ascii parameter's value is independent of the value of 'plot'   
 
-col	
+*col*	  
 vector of color values, colours can be indicated as a vector of colours from 1 to 3 elements, which will be used differently depending on the plot selected. By default, the first colour of the vector will replace the default green, the second the default red, and the third the default blue. Not all colours are used on every plot.   
 
-output	
+*output*	 
 integer (0, 1, 2), as function outputs data (file, mean, sd, CV, file size) on R console after every call, this output can be turned off using 'output=0'. A value of 2 will output the char array used for ascii graph output.   
 
-input	
+*input*	
 factor or vector, the function can accept its own output as input. This can be useful for generating a new graph without the hassle of R reading and analysing the file again. The input can also be a bare 256 element vector: in this case each element represents the appeareances in the file of that [n-1] byte value.   
 
 Details
@@ -87,9 +87,9 @@ Examples
 ![](https://circulosmeos.files.wordpress.com/2016/11/gplv3-txt-gz.png?w=518)
 
 	 # which bytes in this file have a sd greater than 2\*sigma?
-		 BYTES=bytescircle( system.file("extdata", "gplv3.txt.gz", package="bytescircle"), plot=3, 
-		   col=c("gold","blueviolet")); 
-		   which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0 
+	 BYTES=bytescircle( system.file("extdata", "gplv3.txt.gz", package="bytescircle"), plot=3, 
+	   col=c("gold","blueviolet")); 
+	 which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0 
 
 ![](https://circulosmeos.files.wordpress.com/2016/11/gplv3-txt-gz-2.png?w=559)
 
@@ -99,7 +99,17 @@ Examples
 See Also
 ========
 
-Origin of bytes-circle linux command: [https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/](https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/)
+[CRAN package's page](https://cran.r-project.org/package=bytescircle)
+
+[User Manual](https://cran.r-project.org/web/packages/bytescircle/bytescircle.pdf)   
+
+Origin of bytes-circle linux command: [https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/](https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/)   
+
+Notes on implementation
+=======================
+
+This package is implemented with a fast function in native code for file byte’s values reading, that is apt for
+use with big files, even over 2 or 4 GiB (implements [LFS](https://en.wikipedia.org/wiki/Large_file_support)).   
 
 License
 =======

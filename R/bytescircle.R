@@ -8,7 +8,7 @@
 # licensed under GPL-3
 #
 
-#' bytescircle
+#'  Statistics About Bytes Contained in a File as a Circle Plot
 #'
 #'  bytescircle is a function that shows statistics about bytes contained in a file 
 #'  as a circle graph of deviations from mean in sigma increments. 
@@ -99,13 +99,13 @@
 #' 
 #'    $mean: mean value  
 #' 
-#'    $sd: sigma (true sd) value  
+#'    $sd: sigma (true sd) value: sigma=sd()*sqrt((n-1)/n)  
 #' 
 #'    $cv: coefficient of variation (mean/sigma*100)  
 #' 
 #'    $circle: complex matrix representing an ascii circle: each element is the 
 #'        deviation from sigma of the represented byte. Elements which do not 
-#'        represent bytes get the value '0+1i'.  
+#'        represent bytes get the value '0+1i'. See \link[=../doc/bytescircle.pdf]{bytescircle's User Manual}.
 #' 
 #' @examples
 #'  bytescircle( system.file("extdata", "gplv3.txt", package="bytescircle"), 
@@ -114,12 +114,19 @@
 #'  # which bytes in this file have a sd greater than 2*sigma?
 #'  BYTES=bytescircle( system.file("extdata", "gplv3.txt.gz", package="bytescircle"), plot=3, 
 #'    col=c("gold","blueviolet")); 
-#'    which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0 
+#'  which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0 
 #'
 #'  # use a vector as input:
 #'  BYTES=c(256:1); bytescircle(input=BYTES,output=0)
 #' 
 #' @author Roberto S. Galende <roberto.s.galende at gmail.com>
+#'
+#' @seealso
+#'   \link[=../doc/bytescircle.pdf]{bytescircle's User Manual}.
+#'
+#'   Origin of bytes-circle linux command: \url{https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/}
+#'
+#'   Source code repository: \url{https://github.com/circulosmeos/bytescircle}
 #'
 #' @importFrom graphics abline axis boxplot legend par plot points text title
 #' @importFrom stats IQR quantile sd
@@ -180,7 +187,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     }
 
     # check file existence/readability
-    if (file.access(FILE, mode = 4) != 0) {
+    if (file.access(FILE, mode = 0) != 0) {
       stop( 
         capture.output( 
           cat("file '", FILE, "' is not readable. Process aborted.") )
