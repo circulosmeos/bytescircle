@@ -102,6 +102,10 @@ in this case each element represents the appeareances in the file of that
    in this case each element represents the appeareances in the file of that 
    [n-1] byte value.   
 
+*restrict* boolean, if TRUE statistics will use only the number of byte values
+   (buckets) that appear in the file, and not the 256 default value. This makes
+   a difference only if there're byte values that do not appear in the file.
+
 ## Return value
 
 Returns factor of values :   

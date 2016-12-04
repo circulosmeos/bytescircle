@@ -1,6 +1,6 @@
 Package: bytescircle
 Title: Statistics About Bytes Contained in a File as a Circle Plot
-Version: 1.0-1
+Version: 1.1
 Authors@R: person("Roberto", "S. Galende", email = "roberto.s.galende@gmail.com", role = c("aut", "cre"))
 Description: Shows statistics about bytes contained in a file 
   as a circle graph of deviations from mean in sigma increments. 
@@ -19,6 +19,6 @@ RoxygenNote: 5.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2016-11-17 20:13:58 UTC; roberto
+Packaged: 2016-12-04 20:49:18 UTC; roberto
 Author: Roberto S. Galende [aut, cre]
 Maintainer: Roberto S. Galende <roberto.s.galende@gmail.com>

@@ -13,7 +13,7 @@ The package can be directly installed from [CRAN](https://cran.r-project.org/):
 Usage
 =====
 
-	bytescircle(FILE = "", ascii = FALSE, plot = 1, col = c(), output = 1, input = NULL)
+	bytescircle( FILE = "", ascii = FALSE, plot = 1, col = c(), output = 1, input = NULL, restrict = FALSE )
 
 Arguments
 =========
@@ -43,6 +43,9 @@ integer (0, 1, 2), as function outputs data (file, mean, sd, CV, file size) on R
 
 *input*	
 factor or vector, the function can accept its own output as input. This can be useful for generating a new graph without the hassle of R reading and analysing the file again. The input can also be a bare 256 element vector: in this case each element represents the appeareances in the file of that [n-1] byte value.   
+
+*restrict* 
+boolean, if TRUE statistics will use only the number of byte values (buckets) that appear in the file, and not the 256 default value. This makes a difference only if there're byte values that do not appear in the file.   
 
 Details
 =======
