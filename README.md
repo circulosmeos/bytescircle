@@ -8,7 +8,11 @@ bytescircle is an R package that shows statistics about bytes contained in a fil
 The package can be directly installed from [CRAN](https://cran.r-project.org/):   
 
 	install.packages("bytescircle")
-	library(bytescircle)
+	library(bytescircle)    
+
+or from github using the package *devtools*:
+
+	devtools::install_github("circulosmeos/bytescircle")
 
 Usage
 =====
@@ -18,13 +22,13 @@ Usage
 Arguments
 =========
 
-*FILE*	
+*FILE*	  
 char array with the path to an existing file to analyse   
 
-*ascii*	
+*ascii*	   
 boolean, if TRUE R will output an ascii circle char of deviations from sigma (true sd). Each ascii char represents a different deviation from sigma. The array of chars used (from -9/4 to +9/4 sigma, in increments of 0.5 sigma) can be printed using parameter 'output=2'   
 
-*plot*	
+*plot*	  
 number from 0 to 5, indicates plot to represent:   
 0: no plot   
 1: circle of bytes: using an archimedean spiral each byte value is represented with a coloured circle which size indicates the amount of deviation from sigma. A green colour indicates positive sigma value whilst red indicates a negative sigma value. Blue little circles represents byte values that do not appear in the file   
@@ -38,13 +42,13 @@ Note that ascii parameter's value is independent of the value of 'plot'
 *col*	  
 vector of color values, colours can be indicated as a vector of colours from 1 to 3 elements, which will be used differently depending on the plot selected. By default, the first colour of the vector will replace the default green, the second the default red, and the third the default blue. Not all colours are used on every plot.   
 
-*output*	 
+*output*    	 
 integer (0, 1, 2), as function outputs data (file, mean, sd, CV, file size) on R console after every call, this output can be turned off using 'output=0'. A value of 2 will output the char array used for ascii graph output.   
 
-*input*	
+*input*	   
 factor or vector, the function can accept its own output as input. This can be useful for generating a new graph without the hassle of R reading and analysing the file again. The input can also be a bare 256 element vector: in this case each element represents the appeareances in the file of that [n-1] byte value.   
 
-*restrict* 
+*restrict*    
 boolean, if TRUE statistics will use only the number of byte values (buckets) that appear in the file, and not the 256 default value. This makes a difference only if there're byte values that do not appear in the file.   
 
 Details

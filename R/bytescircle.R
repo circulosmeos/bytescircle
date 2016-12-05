@@ -239,9 +239,13 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     SIGMA=sd(BYTE)*sqrt((token$MAX_VALUE-1)/token$MAX_VALUE)
 
   } else {
-    MEAN=mean(BYTE[BYTE>0])
-    SIGMA=sd(BYTE[BYTE>0])*sqrt((length(BYTE[BYTE>0])-1)/length(BYTE[BYTE>0]))
-
+    if (length(BYTE[BYTE>0])>0) {
+      MEAN=mean(BYTE[BYTE>0])
+      SIGMA=sd(BYTE[BYTE>0])*sqrt((length(BYTE[BYTE>0])-1)/length(BYTE[BYTE>0]))
+    } else {
+      MEAN=0
+      SIGMA=0
+    }
   }
 
   if (SIGMA>0)
@@ -349,6 +353,11 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     FILE = gsub( "\\\\", "/" , FILE)
   }
 
+  if (MEAN>0)
+    CV=SIGMA/MEAN*100
+  else
+    CV=0
+
   if (output != 0 | ascii == TRUE) {
     cat("file = ", FILE, "\n")
     if (restrict == FALSE) {
@@ -357,7 +366,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
       cat("mean = ", round(MEAN, 3), 
         "(", length(BYTES$bytes[BYTES$bytes>0]), "/", token$MAX_VALUE, "byte buckets)\n")
     }
-    cat("sigma= ", round(SIGMA, 3), "( CV= ", round(SIGMA/MEAN*100,4), "% )", "\n")
+    cat("sigma= ", round(SIGMA, 3), "( CV= ", round(CV,4), "% )", "\n")
 
     readable_size = SIZE
     i=1
@@ -380,7 +389,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     BYTES$deviation=rep(0,token$MAX_VALUE)
   }
   BYTES$sd=SIGMA
-  BYTES$cv=SIGMA/MEAN*100
+  BYTES$cv=CV
   if (restrict == TRUE) {
     explanation = capture.output(cat("calculated using", length(BYTES$bytes[BYTES$bytes>0]), "byte buckets"))
     attr(BYTES$mean,"note")=explanation

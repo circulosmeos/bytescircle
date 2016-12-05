@@ -19,6 +19,6 @@ RoxygenNote: 5.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2016-12-04 20:49:18 UTC; roberto
+Packaged: 2016-12-05 20:50:20 UTC; roberto
 Author: Roberto S. Galende [aut, cre]
 Maintainer: Roberto S. Galende <roberto.s.galende@gmail.com>
