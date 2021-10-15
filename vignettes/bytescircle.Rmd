@@ -186,7 +186,7 @@ knitr::include_graphics("bytescircle_plot_5.png")
 ```
 
 Note that an *ascii=TRUE* parameter would print an ASCII circle on R output (and this is independent of *plot* parameter value):   
-``````{r eval=FALSE}
+```{r eval=FALSE}
 bytescircle( "bytecircle.Rmd", plot=1, ascii=TRUE )
 ```
                                     
