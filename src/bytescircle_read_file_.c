@@ -17,6 +17,7 @@
 
 #include <stdio.h>  // FILE, fopen
 #include <string.h> // strlen
+#include "bytescircle_read_file_.h"
 
 void bytescircle_read_file_(char** R_FILE, double* R_BYTE_out) {
     
