@@ -126,7 +126,7 @@
 #' @author Roberto S. Galende <roberto.s.galende at gmail.com>
 #'
 #' @seealso
-#'   \link[=../doc/bytescircle.pdf]{bytescircle's User Manual}.
+#'    bytescircle's User Manual (R vignette).
 #'
 #'   Origin of bytes-circle linux command: \url{https://circulosmeos.wordpress.com/2015/10/10/statistics-circle-for-analysing-byte-entropy-in-files/}
 #'
