@@ -404,7 +404,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
 }
 
 
-#' @useDynLib bytescircle bytescircle_read_file_
+#' @useDynLib bytescircle, .registration = TRUE
 bytescircle_read_file <- function ( FILE, BYTE ) {
 
   .C(bytescircle_read_file_, FILE, BYTE)[[2]]
