@@ -11,118 +11,118 @@
 
 #'  Statistics About Bytes Contained in a File as a Circle Plot
 #'
-#'  bytescircle is a function that shows statistics about bytes contained in a file 
-#'  as a circle graph of deviations from mean in sigma increments. 
+#'  bytescircle is a function that shows statistics about bytes contained in a file
+#'  as a circle graph of deviations from mean in sigma increments.
 #'  Histogram and boxplot graphs can also be generated.
 #'
-#'  The function can be useful for statistically analyze the content of files 
-#'  in a glimpse: text files are shown as a green centered crown, compressed 
-#'  and encrypted files should be shown as equally distributed variations with 
-#'  a very low CV (sigma/mean), and other types of files can be classified between 
-#'  these two categories depending on their text vs binary content, which can be 
-#'  useful to quickly determine how information is stored inside them (databases, 
-#'  multimedia files, etc). 
-#'  
-#'  bytescircle() accepts a character string as path for the file, though if 
+#'  The function can be useful for statistically analyze the content of files
+#'  in a glimpse: text files are shown as a green centered crown, compressed
+#'  and encrypted files should be shown as equally distributed variations with
+#'  a very low CV (sigma/mean), and other types of files can be classified between
+#'  these two categories depending on their text vs binary content, which can be
+#'  useful to quickly determine how information is stored inside them (databases,
+#'  multimedia files, etc).
+#'
+#'  bytescircle() accepts a character string as path for the file, though if
 #'  it is not indicated, a file selection GUI will demand it.
 #'  The 'ascii=TRUE' param replicates the linux behaviour of bytes-circle command
-#'  with params '-o 1', or equivalently '-b', as RStudio or R output do not have 
+#'  with params '-o 1', or equivalently '-b', as RStudio or R output do not have
 #'  colour output.
-#' 
+#'
 #'  bytescircle() outputs data (file, mean, sd, CV, file size) on R console, but
-#'  this can be turned off using 'output=0'. A value of 2 will output the char 
+#'  this can be turned off using 'output=0'. A value of 2 will output the char
 #'  array used for ascii graph output.
-#' 
+#'
 #'  'plot' param accepts a number from 0 (no plot) to 5 (boxplot)
-#' 
+#'
 #'  Colours can be indicated as a vector of colours from 1 to 3 elements, which
 #'  will be used differently depending on the plot selected. By default, the
-#'  first colour of the vector will replace the default green, the second the 
-#'  default red, and the third the default blue. Not all colours are used on 
+#'  first colour of the vector will replace the default green, the second the
+#'  default red, and the third the default blue. Not all colours are used on
 #'  every plot.
-#' 
+#'
 #'  bytescircle() can accept its own output as input using 'input=variable'.
 #'  This can be useful for generating a new graph without the hassle of R reading
 #'  and analysing the file again. The input can also be a bare 256 element vector:
-#'  in this case each element represents the appeareances in the file of that 
+#'  in this case each element represents the appeareances in the file of that
 #'  [n-1] byte value.
-#' 
-#' @param FILE char array with the path to an existing file to analyse  
+#'
+#' @param FILE char array with the path to an existing file to analyse
 #' @param ascii boolean, if TRUE R will output an ascii circle char of deviations
 #'    from sigma (true sd). Each ascii char represents a different deviation from
-#'    sigma. The array of chars used (from -9/4 to +9/4 sigma, in increments 
-#'    of 0.5 sigma) can be printed using parameter 'output=2'  
+#'    sigma. The array of chars used (from -9/4 to +9/4 sigma, in increments
+#'    of 0.5 sigma) can be printed using parameter 'output=2'
 #' @param plot number from 0 to 5, indicates plot to represent:
-#' 
-#'    0: no plot 
-#' 
+#'
+#'    0: no plot
+#'
 #'    1: circle of bytes: using an archimedean spiral each byte value is represented
-#'       with a coloured circle which size indicates the amount of deviation from 
+#'       with a coloured circle which size indicates the amount of deviation from
 #'       sigma. A green colour indicates positive sigma value whilst red indicates
 #'       a negative sigma value. Blue little circles represents byte values that do
 #'       not appear in the file
-#' 
+#'
 #'    2: circle of bytes with indication of the byte bucket represented
-#' 
+#'
 #'    3: graph of byte counts: in green values over mean, in red values below it.
-#'       Also the lines for +/- sd over mean (black dotted line), IQR (Interquartile 
+#'       Also the lines for +/- sd over mean (black dotted line), IQR (Interquartile
 #'       Range) (dotted green line), and boxplot's binf and bsup values (dotted blue)
 #'       values are represented as horizontal lines
-#' 
+#'
 #'    4: bar graph of byte counts
-#' 
+#'
 #'    5: boxplot() graph of byte's data
-#' 
-#'    Note that ascii parameter's value is independent of the value of 'plot'  
-#' 
-#' @param col vector of color values, colours can be indicated as a vector of 
-#'    colours from 1 to 3 elements, which will be used differently depending on the 
-#'    plot selected. By default, the first colour of the vector will replace the 
-#'    default green, the second the default red, and the third the default blue. 
-#'    Not all colours are used on every plot.  
-#' @param output integer (0, 1, 2), as function outputs data (file, mean, sd, 
-#'    CV, file size) on R console after every call, this output can be turned 
-#'    off using 'output=0'. A value of 2 will output the char array used for ascii 
-#'    graph output.  
+#'
+#'    Note that ascii parameter's value is independent of the value of 'plot'
+#'
+#' @param col vector of color values, colours can be indicated as a vector of
+#'    colours from 1 to 3 elements, which will be used differently depending on the
+#'    plot selected. By default, the first colour of the vector will replace the
+#'    default green, the second the default red, and the third the default blue.
+#'    Not all colours are used on every plot.
+#' @param output integer (0, 1, 2), as function outputs data (file, mean, sd,
+#'    CV, file size) on R console after every call, this output can be turned
+#'    off using 'output=0'. A value of 2 will output the char array used for ascii
+#'    graph output.
 #' @param input factor or vector, the function can accept its own output as input.
 #'    This can be useful for generating a new graph without the hassle of R reading
 #'    and analysing the file again. The input can also be a bare 256 element vector:
-#'    in this case each element represents the appeareances in the file of that 
+#'    in this case each element represents the appeareances in the file of that
 #'    [n-1] byte value.
 #' @param restrict boolean, if TRUE statistics will use only the number of byte values
 #'    (buckets) that appear in the file, and not the 256 default value. This makes
 #'    a difference only if there're byte values that do not appear in the file.
 #'
 #' @return factor of values :
-#' 
-#'    $bytes: vector of 256 elements, counts of each byte value in the file  
-#' 
-#'    $deviation: vector of 256 elements, (count-mean)/sigma for each byte value in the file  
-#' 
-#'    $file: char array, input file analysed. If input were a variable, it is "R input"  
-#' 
-#'    $mean: mean value  
-#' 
-#'    $sd: sigma (true sd) value: sigma=sd()*sqrt((n-1)/n)  
-#' 
-#'    $cv: coefficient of variation (mean/sigma*100)  
-#' 
-#'    $circle: complex matrix representing an ascii circle: each element is the 
-#'        deviation from sigma of the represented byte. Elements which do not 
-#'        represent bytes get the value '0+1i'. See \link[=../doc/bytescircle.pdf]{bytescircle's User Manual}.
-#' 
+#'
+#'    $bytes: vector of 256 elements, counts of each byte value in the file
+#'
+#'    $deviation: vector of 256 elements, (count-mean)/sigma for each byte value in the file
+#'
+#'    $file: char array, input file analysed. If input were a variable, it is "R input"
+#'
+#'    $mean: mean value
+#'
+#'    $sd: sigma (true sd) value: sigma=sd()*sqrt((n-1)/n)
+#'
+#'    $cv: coefficient of variation (mean/sigma*100)
+#'
+#'    $circle: complex matrix representing an ascii circle: each element is the
+#'        deviation from sigma of the represented byte. Elements which do not
+#'        represent bytes get the value '0+1i'. See bytescircle's User Manual (R vignette).
+#'
 #' @examples
-#'  bytescircle( system.file("extdata", "gplv3.txt", package="bytescircle"), 
+#'  bytescircle( system.file("extdata", "gplv3.txt", package="bytescircle"),
 #'    ascii=TRUE, plot=1, output=2)
 #'
 #'  # which bytes in this file have a sd greater than 2*sigma?
-#'  BYTES=bytescircle( system.file("extdata", "gplv3.txt.gz", package="bytescircle"), plot=3, 
-#'    col=c("gold","blueviolet")); 
-#'  which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0 
+#'  BYTES=bytescircle( system.file("extdata", "gplv3.txt.gz", package="bytescircle"), plot=3,
+#'    col=c("gold","blueviolet"));
+#'  which(BYTES$deviation>2.0)-1 # -1, 'cause BYTES[1] corresponds to byte 0
 #'
 #'  # use a vector as input:
 #'  BYTES=c(256:1); bytescircle(input=BYTES,output=0)
-#' 
+#'
 #' @author Roberto S. Galende <roberto.s.galende at gmail.com>
 #'
 #' @seealso
@@ -134,14 +134,14 @@
 #'
 #' @importFrom graphics abline axis boxplot legend par plot points text title
 #' @importFrom stats IQR quantile sd
-#' @importFrom utils capture.output 
+#' @importFrom utils capture.output
 #'
 #' @export
 bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output = 1, input = NULL, restrict = FALSE ) {
 
-  token = bytescircle.token() 
+  token = bytescircle.token()
 
-  # three colors can be assigned; 
+  # three colors can be assigned;
   # otherwise they'll get default predefined values depending on graph type
 
   if (plot < 4)
@@ -161,8 +161,8 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     if ( is.null(names(input)) ) {
       # input is a simple array
       if (length(input)!=token$MAX_VALUE) {
-        stop( 
-          capture.output( 
+        stop(
+          capture.output(
             cat("array passed has not proper length (", token$MAX_VALUE, " elements required).") )
           )
       } else {
@@ -179,7 +179,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
           stop( "data frame passed has no $byte row name." )
         }
     }
-    
+
     SIZE = sum(BYTE)
 
   } else {
@@ -192,8 +192,8 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
 
     # check file existence/readability
     if (file.access(FILE, mode = 0) != 0) {
-      stop( 
-        capture.output( 
+      stop(
+        capture.output(
           cat("file '", FILE, "' is not readable. Process aborted.") )
         )
     }
@@ -208,7 +208,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     ###LOOP = TRUE
     ###BLOCK_SIZE=65536
     ###BLOCKS=trunc(SIZE/BLOCK_SIZE)
-    ###if (SIZE%%BLOCK_SIZE != 0) BLOCKS=BLOCKS+1 
+    ###if (SIZE%%BLOCK_SIZE != 0) BLOCKS=BLOCKS+1
     ###n=1
     ###while ( n<=BLOCKS ) {
     ###  bytes = readBin(to.read, n=BLOCK_SIZE, size=1, what="raw")
@@ -222,7 +222,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     ###  n=n+1
     ###}
     ###close(to.read)
-    
+
     # open and load counts of bytes: .C version
     BYTE = bytescircle_read_file( FILE, BYTE )
 
@@ -251,16 +251,16 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
   if (SIGMA>0)
     BYTES = list(bytes=BYTE,
                deviation=(BYTE-MEAN)/SIGMA*4 )
-  else 
+  else
     BYTES = list(bytes=BYTE,
                deviation=rep(0,token$MAX_VALUE) )
-  
+
   t = which(abs(BYTES$deviation)>=(token$MAX_SIGMA_CHAR) & BYTES$bytes!=0)
   BYTES$deviation[ t[which(BYTES$deviation[t]>0)] ] = +token$MAX_SIGMA_CHAR
   BYTES$deviation[ t[which(BYTES$deviation[t]<=0)]] = -token$MAX_SIGMA_CHAR
-  
+
   BYTES$deviation[which(BYTE==0)] = token$MISSING_CHAR_INDEX
-  
+
   # show graph using ascii art
   circle=create.statistics.circle( BYTES, token )
   if (ascii==TRUE) {
@@ -271,7 +271,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
   # plot data as a circle graph of sd increment little circles
   if (plot==1 | plot==2) {
     coordinates=create.statistics.circle.to.plot( token )
-    plot.circle( BYTES, FILE, coordinates, color, token )   
+    plot.circle( BYTES, FILE, coordinates, color, token )
   }
 
   # plot data as a circle graph of sd increment little circles
@@ -279,15 +279,15 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
   if (plot==2) {
     text(Re(coordinates),Im(coordinates),labels=c(0:255))
   }
-  
+
   # graph just byte counts (with colors)
   if (plot==3) {
     par(mar = par()$mar+c(0, 0, 1, 0))
     plot( which(BYTES$bytes>=MEAN)-1,
-          BYTES$bytes[which(BYTES$bytes>=MEAN)], 
-        col=color[1], 
+          BYTES$bytes[which(BYTES$bytes>=MEAN)],
+        col=color[1],
         pch=18,
-        xlim=c(1,token$MAX_VALUE), 
+        xlim=c(1,token$MAX_VALUE),
         ylim=c(min(BYTES$bytes),max(BYTES$bytes)),
         xaxt = 'n',
         xlab="byte #",
@@ -295,15 +295,15 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
         )
     axis(3)
     points( which(BYTES$bytes<MEAN & BYTES$bytes!=0)-1,
-            BYTES$bytes[which(BYTES$bytes<MEAN & BYTES$bytes!=0)], 
+            BYTES$bytes[which(BYTES$bytes<MEAN & BYTES$bytes!=0)],
         col=color[2],
         pch=18
         )
     points( which(BYTES$bytes==0)-1,
-            BYTES$bytes[which(BYTES$bytes==0)], 
+            BYTES$bytes[which(BYTES$bytes==0)],
         col=color[3],
         pch=1
-        )    
+        )
     abline( h=MEAN )
     # +/-sd
     abline( h=(MEAN+SIGMA), lty=3)
@@ -363,7 +363,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
     if (restrict == FALSE) {
       cat("mean = ", round(MEAN, 3), "\n")
     } else {
-      cat("mean = ", round(MEAN, 3), 
+      cat("mean = ", round(MEAN, 3),
         "(", length(BYTES$bytes[BYTES$bytes>0]), "/", token$MAX_VALUE, "byte buckets)\n")
     }
     cat("sigma= ", round(SIGMA, 3), "( CV= ", round(CV,4), "% )", "\n")
@@ -378,7 +378,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
 
     if (output == 2 & ascii == TRUE)
       cat("chars= ", token$sigma_char, " (0.5 sigma (", round(SIGMA/2, 3), ") each)\n")
-  }  
+  }
 
   # return zusammengetragen data
   BYTES$file=FILE
@@ -398,7 +398,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
   }
   attr(BYTES$cv,"description")="percentage value"
   BYTES$circle=circle
-  
+
   invisible (BYTES)
 
 }
@@ -406,7 +406,7 @@ bytescircle = function ( FILE = "", ascii = FALSE, plot = 1, col = c(), output =
 
 #' @useDynLib bytescircle bytescircle_read_file_
 bytescircle_read_file <- function ( FILE, BYTE ) {
-  
+
   .C(bytescircle_read_file_, FILE, BYTE)[[2]]
 
 }
@@ -425,12 +425,12 @@ bytescircle.token = function () {
   t$INIT_X = round( t$MAX_X/2 )
   t$INIT_Y = round( t$MAX_Y/2 )+1
 
-  t$sigma_char   = c(  '.', ',', '-', '~', '+', '*', 'o', 'O', '#', '@', 
-                  '=' , 
+  t$sigma_char   = c(  '.', ',', '-', '~', '+', '*', 'o', 'O', '#', '@',
+                  '=' ,
                   ' ' )
-  t$MAX_SIGMA_CHAR = length( t$sigma_char ) -2 
+  t$MAX_SIGMA_CHAR = length( t$sigma_char ) -2
   t$MISSING_CHAR = t$sigma_char[ length( t$sigma_char ) -1  ]
-  t$MISSING_CHAR_INDEX = length( t$sigma_char ) -1 
+  t$MISSING_CHAR_INDEX = length( t$sigma_char ) -1
   t$EMPTY_CHAR = t$sigma_char[ length( t$sigma_char ) ]
   t$EMPTY_CHAR_INDEX = length( t$sigma_char )
 
@@ -460,17 +460,17 @@ create.statistics.circle = function ( BYTES, token ) {
   x=token$INIT_X
   y=token$INIT_Y
   k=0 # unused counter
-  
+
   circle = matrix(rep(token$CIRCLE_EMPTY_VALUE,token$MAX_X*token$MAX_Y), nrow=token$MAX_Y)
-  
+
   circle[round(y),round(x)] = BYTES$deviation[1]
-  coordinates[1] = 
+  coordinates[1] =
     complex( real = round(x), imaginary = round(y) )
   x=x+1
   circle[round(y),round(x)] = BYTES$deviation[2]
-  coordinates[2] = 
+  coordinates[2] =
     complex( real = round(x), imaginary = round(y) )
-  
+
   for ( n in 3:token$MAX_VALUE) {
     repeat {
       k=k+1
@@ -490,21 +490,21 @@ create.statistics.circle = function ( BYTES, token ) {
     }
     coordinates[n]=
       complex(real = xx,imaginary = yy)
-    
+
   }
 
   # coordinates is calculated... but actually never used
 
   circle
-  
+
 }
 
 
 # create a vector of coordinates for the archimedean spiral plot
 create.statistics.circle.to.plot = function ( token ) {
-  
+
   coordinates = c(rep(0,token$MAX_VALUE))
-  
+
   x=0
   y=0
   r=0.3
@@ -512,113 +512,113 @@ create.statistics.circle.to.plot = function ( token ) {
   b=6
   inc=0.001
   step=0.2
-  
+
   for ( n in 1:token$MAX_VALUE) {
-    
+
     previous.length = length.on.archimedes.spiral(r)
-    
+
     repeat {
       r = r + inc
-      if ( length.on.archimedes.spiral(r) >= 
+      if ( length.on.archimedes.spiral(r) >=
            (previous.length+step) ) {
         break;
       }
     }
-    
+
     theta = r*b
-    
+
     COORDS=porlar2cartesian(r, theta)
-    
+
     coordinates[n]=complex(real = COORDS[1] + x,
                            imaginary = COORDS[2] + y)
   }
-  
+
   # slight manual corrections for a better visual appearance
   coordinates[1]=-0.05+0.3i
   coordinates[2]=coordinates[2]-0.1+0.1i
-  
+
   coordinates
-  
+
 }
 
 
 length.on.archimedes.spiral = function ( theta ) {
-    
+
   u = atan(theta)
-  
-  value.theta=0.5 * ( (1/cos(u))*tan(u) + 
+
+  value.theta=0.5 * ( (1/cos(u))*tan(u) +
                   log(abs((1/cos(u)) + tan(u))) )
 
   value.theta
-  
+
 }
 
 
 porlar2cartesian = function ( r, theta ) {
-  
+
   x = r * cos(theta)
   y = r * sin(theta)
-  
+
   c(x,y)
-  
+
 }
 
 
 # prints on R output an ascii circle graph
 # emulating the circle plot
 print.circle = function ( circle, token ) {
-  
+
   rows.to.print = rep('',token$MAX_Y)
-  
+
   for (y in 1:token$MAX_Y) {
     for (x in 1:token$MAX_X) {
-      
-      if ( circle[y, x] != token$MISSING_CHAR_INDEX & 
+
+      if ( circle[y, x] != token$MISSING_CHAR_INDEX &
            circle[y, x] != token$CIRCLE_EMPTY_VALUE ) {
         deviation.index = trunc( Re(circle[y, x])/2 ) + trunc(token$MAX_SIGMA_CHAR/2) + 1
         if (deviation.index > token$MAX_SIGMA_CHAR)
           deviation.index = token$MAX_SIGMA_CHAR
         rows.to.print[y] =
-          capture.output( cat(rows.to.print[y], 
-              token$sigma_char[ deviation.index ], 
+          capture.output( cat(rows.to.print[y],
+              token$sigma_char[ deviation.index ],
                 sep='') )
       } else {
         if ( circle[y, x] == token$CIRCLE_EMPTY_VALUE ) {
           rows.to.print[y] =
-            capture.output( cat(rows.to.print[y], 
-              token$EMPTY_CHAR, 
+            capture.output( cat(rows.to.print[y],
+              token$EMPTY_CHAR,
                 sep='') )
         } else {
           rows.to.print[y] =
-            capture.output( cat(rows.to.print[y], 
-                token$MISSING_CHAR, 
+            capture.output( cat(rows.to.print[y],
+                token$MISSING_CHAR,
                   sep='') )
         }
       }
-      
+
     }
   }
-  
+
   # print rows each one on a new line
   cat(sprintf("%s\n",rows.to.print))
-  
+
   rows.to.print
-  
+
 }
 
 
 # plots the archimedean spiral with different circle sizes and colours
 plot.circle = function ( BYTES, FILE, coordinates, color, token ) {
-  
+
   plot(0,0,cex=0,
-        axes=FALSE, frame.plot=FALSE, 
+        axes=FALSE, frame.plot=FALSE,
         xlim = c(min(Re(coordinates)),max(Re(coordinates))),
         ylim = c(min(Im(coordinates)),max(Im(coordinates))),
         xlab = "",
         ylab = "",
         main = FILE
         )
-  
+
   for (n in 1:token$MAX_VALUE) {
 
     COLOR=color[1]
@@ -643,7 +643,7 @@ plot.circle = function ( BYTES, FILE, coordinates, color, token ) {
              cex=0.5,
              col=color[3])
     }
-  
+
   }
 
 }
