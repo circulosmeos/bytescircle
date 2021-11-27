@@ -1,6 +1,6 @@
 Package: bytescircle
 Title: Statistics About Bytes Contained in a File as a Circle Plot
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: person("Roberto", "S. Galende", email = "roberto.s.galende@gmail.com", role = c("aut", "cre"))
 Description: Shows statistics about bytes contained in a file 
   as a circle graph of deviations from mean in sigma increments. 
