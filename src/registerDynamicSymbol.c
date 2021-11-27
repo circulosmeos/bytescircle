@@ -19,6 +19,6 @@ void R_init_bytescircle(DllInfo* info) {
 
     R_registerRoutines(info, cMethods, NULL, NULL, NULL);
 
-    R_useDynamicSymbols(info, TRUE);
+    R_useDynamicSymbols(info, FALSE);
 
 }
